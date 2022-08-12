@@ -3,8 +3,7 @@ import json
 from os.path import exists
 
 def getChoices():
-	choices = ["rock", "paper", "scissors"]
-	return choices
+	return ["rock", "paper", "scissors"]
 
 def getRandomChoice():
 	return random.choice(getChoices())
@@ -33,33 +32,31 @@ def getComputerScore():
   		return data['computer']['score']
 
 def win():
-	if exists("data.json"):
-		d = {
-				"player": {
-				"score": getPlayerScore() + 1
-			},
-				"computer": {
-				"score": getComputerScore()
-			},
-		}
-		
-		with open('data.json', 'w') as json_file:
-  			json.dump(d, json_file)
-	else:
+	if not exists("data.json"):
 		createDataFile()
+	d = {
+			"player": {
+			"score": getPlayerScore() + 1
+		},
+			"computer": {
+			"score": getComputerScore()
+		},
+	}
+		
+	with open('data.json', 'w') as json_file:
+  		json.dump(d, json_file)
 
 def loss():
-	if exists("data.json"):
-		d = {
-				"player": {
-				"score": getPlayerScore()
-			},
-				"computer": {
-				"score": getComputerScore() + 1
-			},
-		}
-		
-		with open('data.json', 'w') as json_file:
-  			json.dump(d, json_file)
-	else:
+	if not exists("data.json"):
 		createDataFile()
+	d = {
+			"player": {
+			"score": getPlayerScore()
+		},
+			"computer": {
+			"score": getComputerScore() + 1
+		},
+	}
+		
+	with open('data.json', 'w') as json_file:
+  		json.dump(d, json_file)
