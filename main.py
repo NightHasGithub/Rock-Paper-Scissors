@@ -9,7 +9,6 @@ computer_choice = getChoices()
 data = input("Please input either Rock, Paper or Scissors")
 player_choice = data.lower()
 
-
 if player_choice == "rock":
 	if computer_choice == "rock":
 		print("You and the Computer both chose Rock, leading to a draw")
