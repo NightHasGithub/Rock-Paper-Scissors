@@ -1,34 +1,45 @@
 import random
+import time
+import extra
+import json
 
-choices = ["rock", "paper", "scissors"]
+player_choice = input("Please input either Rock, Paper or Scissors").lower()
 
-def getChoices():
-	return random.choice(choices)
-
-computer_choice = getChoices()
-data = input("Please input either Rock, Paper or Scissors")
-player_choice = data.lower()
-
-if player_choice == "rock":
-	if computer_choice == "rock":
-		print("You and the Computer both chose Rock, leading to a draw")
-	elif computer_choice == "paper":
-		print("You'r Rock was covered by the Computer's Paper")
-	elif computer_choice == "scissors":
-		print("The Computer's Scissors was defeated by you'r Rock")
-elif player_choice == "paper":
-	if computer_choice == "rock":
-		print("The Computer's Rock was no match for you'r Paper")
-	elif computer_choice == "paper":
-		print("You and the Computer both chose Paper, leading to a draw")
-	elif computer_choice == "scissors":
-		print("The Computer cut up your Paper into nothingness")
-elif player_choice == "scissors":
-	if computer_choice == "rock":
-		print("You'r Scissors was no match for the Computer's Rock")
-	elif computer_choice == "paper":
-		print("The Computer's Paper was no match for you'r Scissors")
-	elif computer_choice == "scissors":
-		print("You and the Computer both chose Scissors, leading to a draw")
-else:
-	print("ERROR: Please select either Rock, Paper or Scissors")
+def startGame():
+	print("Computer is choosing...")
+	computer_choice = extra.getRandomChoice()
+	time.sleep(1.5)
+	match player_choice:
+		case "rock":
+			match computer_choice:
+				case "rock":
+					print("You and the Computer both chose Rock, leading to a draw")
+				case "paper":
+					print("You'r Rock was covered by the Computer's Paper")
+					extra.loss()
+				case "scissors":
+					print("The Computer's Scissors was defeated by you'r Rock")
+					extra.win()
+		case "paper":
+			match computer_choice:
+				case "rock":
+					print("The Computer's Rock was no match for you'r Paper")
+					extra.win()
+				case "paper":
+					print("You and the Computer both chose Paper, leading to a draw")
+				case "scissors":
+					print("The Computer cut up your Paper into nothingness")
+					extra.loss()
+		case "scissors":
+			match computer_choice:
+				case "rock":
+					print("You'r Scissors was no match for the Computer's Rock")
+					extra.loss()
+				case "paper":
+					print("The Computer's Paper was no match for you'r Scissors")
+					extra.win()
+				case "scissors":
+					print("You and the Computer both chose Scissors, leading to a draw")
+		case _:
+			print("[ERROR] Invalid type selected, choose between Rock, Paper or Scissors!")
+startGame()
